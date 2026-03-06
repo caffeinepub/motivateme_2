@@ -1,0 +1,327 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── Fonts ── */
+@font-face {
+  font-family: "Bricolage Grotesque";
+  src: url("/assets/fonts/BricolageGrotesque[opsz,wdth,wght].woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Fraunces";
+  src: url("/assets/fonts/Fraunces[SOFT,WONK,opsz,wght].woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Figtree";
+  src: url("/assets/fonts/Figtree[wght].woff2") format("woff2");
+  font-weight: 300 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --radius: 1rem;
+
+    /* Warm motivational palette — deep indigo bg, golden accent */
+    --background: 0.13 0.025 265;
+    --foreground: 0.97 0.01 90;
+
+    --card: 0.16 0.03 265;
+    --card-foreground: 0.97 0.01 90;
+
+    --popover: 0.18 0.03 265;
+    --popover-foreground: 0.97 0.01 90;
+
+    /* Golden primary */
+    --primary: 0.82 0.16 80;
+    --primary-foreground: 0.12 0.02 265;
+
+    --secondary: 0.22 0.04 265;
+    --secondary-foreground: 0.88 0.05 80;
+
+    --muted: 0.20 0.03 265;
+    --muted-foreground: 0.62 0.04 265;
+
+    --accent: 0.75 0.19 50;
+    --accent-foreground: 0.12 0.02 265;
+
+    --destructive: 0.65 0.22 25;
+    --destructive-foreground: 0.97 0.01 90;
+
+    --border: 0.26 0.04 265;
+    --input: 0.22 0.04 265;
+    --ring: 0.82 0.16 80;
+
+    --chart-1: 0.82 0.16 80;
+    --chart-2: 0.72 0.18 50;
+    --chart-3: 0.65 0.22 300;
+    --chart-4: 0.60 0.18 200;
+    --chart-5: 0.55 0.14 150;
+
+    --sidebar: 0.15 0.028 265;
+    --sidebar-foreground: 0.97 0.01 90;
+    --sidebar-primary: 0.82 0.16 80;
+    --sidebar-primary-foreground: 0.12 0.02 265;
+    --sidebar-accent: 0.22 0.04 265;
+    --sidebar-accent-foreground: 0.88 0.05 80;
+    --sidebar-border: 0.26 0.04 265;
+    --sidebar-ring: 0.82 0.16 80;
+
+    /* Custom app tokens */
+    --gold: 0.82 0.16 80;
+    --gold-warm: 0.75 0.19 50;
+    --navy-deep: 0.10 0.02 265;
+    --navy-mid: 0.16 0.03 265;
+    --navy-light: 0.22 0.04 265;
+    --quote-card-bg: 0.14 0.035 270;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Figtree", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* ── App Shell ── */
+.app-shell {
+  max-width: 480px;
+  margin: 0 auto;
+  min-height: 100dvh;
+  position: relative;
+  background: oklch(var(--background));
+  overflow: hidden;
+}
+
+/* ── Gradient mesh background ── */
+.app-bg-mesh {
+  background:
+    radial-gradient(ellipse 80% 40% at 50% -10%, oklch(0.25 0.06 265 / 0.8) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 30% at 90% 80%, oklch(0.20 0.05 300 / 0.4) 0%, transparent 50%),
+    oklch(var(--background));
+}
+
+/* ── Quote hero card ── */
+.quote-hero-card {
+  background:
+    radial-gradient(ellipse 100% 60% at 50% 0%, oklch(0.82 0.16 80 / 0.18) 0%, transparent 55%),
+    radial-gradient(ellipse 70% 40% at 10% 100%, oklch(0.72 0.18 50 / 0.10) 0%, transparent 50%),
+    oklch(var(--card));
+  border: 1px solid oklch(0.82 0.16 80 / 0.28);
+  box-shadow:
+    0 0 0 1px oklch(0.82 0.16 80 / 0.06) inset,
+    0 8px 32px oklch(0.05 0.01 265 / 0.55),
+    0 1px 0 oklch(0.82 0.16 80 / 0.35) inset;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Gold shimmer accent line at top of hero card */
+.quote-hero-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    oklch(0.88 0.18 80) 30%,
+    oklch(0.92 0.16 60) 60%,
+    transparent 100%
+  );
+  border-radius: var(--radius) var(--radius) 0 0;
+}
+
+/* ── Gold text ── */
+.text-gold {
+  color: oklch(var(--gold));
+}
+
+.text-gold-warm {
+  color: oklch(var(--gold-warm));
+}
+
+/* ── Animated gradient text ── */
+.gradient-text {
+  background: linear-gradient(135deg, oklch(0.90 0.16 80), oklch(0.82 0.19 50), oklch(0.88 0.14 90));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Quote text styling ── */
+.quote-text {
+  font-family: "Fraunces", serif;
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.5;
+}
+
+/* ── Display font ── */
+.font-display {
+  font-family: "Bricolage Grotesque", sans-serif;
+}
+
+/* ── Body font ── */
+.font-body {
+  font-family: "Figtree", sans-serif;
+}
+
+/* ── Nav bar ── */
+.nav-bar {
+  background: oklch(0.11 0.03 265 / 0.92);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-top: 1px solid oklch(0.82 0.16 80 / 0.12);
+  box-shadow: 0 -1px 0 oklch(0.82 0.16 80 / 0.08), 0 -8px 24px oklch(0.05 0.01 265 / 0.5);
+}
+
+/* The sliding active pill behind nav item */
+.nav-active-pill {
+  position: absolute;
+  inset: 0;
+  border-radius: 0.875rem;
+  background: linear-gradient(
+    145deg,
+    oklch(0.82 0.16 80 / 0.18),
+    oklch(0.72 0.18 50 / 0.12)
+  );
+  border: 1px solid oklch(0.82 0.16 80 / 0.22);
+}
+
+/* ── Category tab pill ── */
+/* Active/inactive styles handled via layoutId motion pill in JSX */
+.category-tab-active {
+  color: oklch(var(--navy-deep));
+  font-weight: 700;
+  position: relative;
+  z-index: 1;
+}
+
+.category-tab {
+  color: oklch(var(--muted-foreground));
+  background: oklch(var(--muted) / 0.5);
+  border: 1px solid oklch(var(--border));
+  position: relative;
+  z-index: 1;
+}
+
+.category-tab:hover {
+  color: oklch(var(--foreground));
+  border-color: oklch(0.82 0.16 80 / 0.3);
+}
+
+/* Pill wrapper for category tabs — needed for motion layoutId */
+.category-pill-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  overflow: hidden;
+}
+
+/* The sliding motion background pill */
+.category-active-bg {
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  background: linear-gradient(
+    120deg,
+    oklch(0.88 0.17 80),
+    oklch(0.80 0.19 55)
+  );
+  box-shadow: 0 2px 12px oklch(0.82 0.16 80 / 0.4);
+  z-index: 0;
+}
+
+/* ── Scrollable content area ── */
+.content-area {
+  padding-bottom: 80px;
+  overflow-y: auto;
+  height: 100dvh;
+  scrollbar-width: none;
+}
+
+.content-area::-webkit-scrollbar {
+  display: none;
+}
+
+/* ── Quote card mini ── */
+.quote-card-mini {
+  background: oklch(var(--card));
+  border: 1px solid oklch(var(--border));
+  transition: border-color 0.2s ease, transform 0.15s ease;
+}
+
+.quote-card-mini:hover {
+  border-color: oklch(0.82 0.16 80 / 0.35);
+  transform: translateY(-1px);
+}
+
+/* ── Heart button ── */
+.heart-btn {
+  transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.heart-btn:active {
+  transform: scale(0.85);
+}
+
+.heart-btn.favorited {
+  filter: drop-shadow(0 0 6px oklch(0.72 0.22 15 / 0.6));
+}
+
+/* ── Skeleton shimmer ── */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    oklch(var(--muted)) 25%,
+    oklch(0.26 0.05 265) 50%,
+    oklch(var(--muted)) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: calc(var(--radius) - 4px);
+}
+
+/* ── Stagger animation helpers ── */
+.stagger-1 { animation-delay: 0.05s; }
+.stagger-2 { animation-delay: 0.10s; }
+.stagger-3 { animation-delay: 0.15s; }
+.stagger-4 { animation-delay: 0.20s; }
+.stagger-5 { animation-delay: 0.25s; }
+
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-up {
+  animation: fadeSlideUp 0.4s ease both;
+}
+
+/* ── Safe area ── */
+.safe-bottom {
+  padding-bottom: env(safe-area-inset-bottom, 0);
+}
